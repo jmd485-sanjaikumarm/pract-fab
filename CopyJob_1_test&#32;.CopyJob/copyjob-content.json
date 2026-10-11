@@ -1,0 +1,77 @@
+{
+  "properties": {
+    "jobMode": "Batch",
+    "source": {
+      "type": "Json",
+      "connectionSettings": {
+        "type": "Lakehouse",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "artifactId": "f8c5aeeb-f911-a570-4fb2-36d27885f1e4",
+          "rootFolder": "Files"
+        }
+      }
+    },
+    "destination": {
+      "type": "LakehouseTable",
+      "connectionSettings": {
+        "type": "Lakehouse",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "artifactId": "f8c5aeeb-f911-a570-4fb2-36d27885f1e4",
+          "rootFolder": "Tables"
+        }
+      }
+    },
+    "policy": {
+      "timeout": "0.12:00:00",
+      "retry": 0
+    }
+  },
+  "activities": [
+    {
+      "id": "d70cbee6-c155-4941-aeba-51d1dcdf03e2",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "location": {
+              "type": "LakehouseLocation",
+              "fileName": "chennai_2026-09-22.json",
+              "folderPath": "raw/weather"
+            }
+          },
+          "storeSettings": {
+            "recursive": true,
+            "enablePartitionDiscovery": false
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "testtable1010"
+          },
+          "applyVOrder": false,
+          "enableTimestampNtz": false,
+          "enableChangeDataFeed": false
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        },
+        "columnFlattenSettings": {
+          "expandArrayIntoMultipleRows": true,
+          "flattenNestedProperties": true,
+          "flattenColumnDelimiter": "."
+        }
+      }
+    }
+  ]
+}
